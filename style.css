@@ -82,3 +82,31 @@ body {
   font-size: 16px;
   margin-right: 20px;
 }
+/* Add this to style.css */
+.talk {
+  display: none; /* Hidden by default */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #00bcd4;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.talk.glow {
+  display: block; /* Make button visible */
+  box-shadow: 0 0 15px #00bcd4, 0 0 30px #00bcd4;
+  animation: glow-animation 1s infinite alternate;
+}
+
+@keyframes glow-animation {
+  0% {
+      box-shadow: 0 0 5px #00bcd4;
+  }
+  100% {
+      box-shadow: 0 0 20px #00bcd4;
+  }
+}

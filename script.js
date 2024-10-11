@@ -21,7 +21,7 @@ function wishMe() {
     } else if (hour >= 12 && hour < 17) {
         speak("Good Afternoon Master...");
     } else {
-        speak("Good Evening ");
+        speak("Good Evening Sir...");
     }
 }
 
@@ -29,25 +29,20 @@ function wishMe() {
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
-// Listen for the first "Hello Jarvis"
-recognition.onresult = (event) => {
-    const transcript = event.results[event.resultIndex][0].transcript.toLowerCase();
-    content.textContent = transcript;
+// Show the glowing button when Jarvis asks "How may I help you?"
+function showButton() {
+    btn.style.display = 'block';
+    btn.classList.add('glow');
+}
 
-    // Check if user says "Hello Jarvis"
-    if (transcript.includes('hello jarvis')) {
-        speak(" hello bhaskar , How may I help you?");
-        recognition.stop(); // Stop after detecting "Hello Jarvis"
-    }
-
-};
-
-// Start speech recognition when the button is pressed
+// Stop the glowing effect when the button is clicked
 btn.addEventListener('click', () => {
     content.textContent = "Listening....";
-    recognition.start(); // Start listening after button press
+    btn.classList.remove('glow');
+    recognition.start(); // Start listening when the button is clicked
 });
 
+// Listen for commands after "Hello Jarvis"
 recognition.onresult = (event) => {
     const transcript = event.results[0][0].transcript.toLowerCase();
     content.textContent = transcript;
@@ -58,6 +53,7 @@ recognition.onresult = (event) => {
 function takeCommand(message) {
     if (message.includes('hey') || message.includes('hello')) {
         speak("Hello Sir, How may I help you today?");
+        showButton(); // Show the button when Jarvis says "How may I help you?"
     } else if (message.includes("open google")) {
         window.open("https://google.com", "_blank");
         speak("Opening Google...");
@@ -82,9 +78,11 @@ function takeCommand(message) {
     } else if (message.includes('calculator')) {
         window.open('Calculator:///');
         speak("Opening Calculator");
+    } else if (message.includes('stop')) {
+        speak("Goodbye, Sir.");
+        recognition.stop();
     } else {
-        window.open(`https://www.google.com/search?q=${message.replace(" ", "+")}`, "_blank");
-        speak("I found some information on Google regarding " + message);
+        speak("I didn't understand that. Could you please repeat?");
     }
 
     recognition.stop(); // Stop listening after executing the command
@@ -93,7 +91,7 @@ function takeCommand(message) {
 // Start interaction only after user presses "Enter"
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-        speak(" i am jarvis !"); // Speak "Hello Sir" when Enter is pressed
+        speak("I am Jarvis!");
         wishMe(); // Call the greeting function
         recognition.start(); // Start listening for "Hello Jarvis" after greeting
     }
