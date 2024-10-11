@@ -88,25 +88,16 @@ function takeCommand(message) {
         speak("Goodbye, Sir.");
         recognition.stop();
         
-        // Set a timeout to exit the program after 5 seconds
-        recognitionTimeout = setTimeout(() => {
-            speak("Thanks for using Jarvis. Goodbye!");
-            setTimeout(() => {
-                location.reload(); // Refresh the page after saying goodbye
-            }, 1000); // Wait 1 second before refreshing
-        }, 5000); // 5 seconds before program exit
+        // Set a timeout to refresh the page after saying goodbye
+        setTimeout(() => {
+            location.reload(); // Refresh the page after 5 seconds
+        }, 5000); // 5 seconds
         return; // Exit the function
     } else {
         speak("I didn't understand that. Could you please repeat?");
     }
 
-    // Set a new inactivity timeout
-    inactivityTimeout = setTimeout(() => {
-        speak("Thanks for using Jarvis. Goodbye!");
-        setTimeout(() => {
-            location.reload(); // Refresh the page after saying goodbye
-        }, 1000); // Wait 1 second before refreshing
-    }, 20000); // 20 seconds of inactivity
+    // Optional: Set inactivity timeout or any additional logic can be added here
 }
 
 // Start interaction only after user presses "Enter"
@@ -122,4 +113,3 @@ window.addEventListener('keydown', (e) => {
 recognition.onend = () => {
     btn.classList.add('glow'); // Make the button glow again when recognition stops
 };
-
