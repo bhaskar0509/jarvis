@@ -109,3 +109,8 @@ window.addEventListener('keydown', (e) => {
         recognition.start(); // Start listening for "Hello Jarvis" after greeting
     }
 });
+
+// Allow the button to restart recognition after it has been stopped
+recognition.onend = () => {
+    btn.classList.add('glow'); // Make the button glow again when recognition stops
+};
