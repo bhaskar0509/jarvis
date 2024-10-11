@@ -2,6 +2,8 @@
 const btn = document.querySelector('.talk');
 const content = document.querySelector('.content');
 
+let inactivityTimeout; // Variable to track inactivity timeout
+
 // Function to speak text using SpeechSynthesis
 function speak(text) {
     const text_speak = new SpeechSynthesisUtterance(text);
@@ -51,6 +53,9 @@ recognition.onresult = (event) => {
 
 // Function to process commands
 function takeCommand(message) {
+    // Clear the inactivity timeout whenever a command is received
+    clearTimeout(inactivityTimeout);
+
     if (message.includes('hey') || message.includes('hello')) {
         speak("Hello Sir, How may I help you today?");
         showButton(); // Show the button when Jarvis says "How may I help you?"
@@ -81,11 +86,19 @@ function takeCommand(message) {
     } else if (message.includes('stop')) {
         speak("Goodbye, Sir.");
         recognition.stop();
+        clearTimeout(inactivityTimeout); // Clear any existing timeout
+        return; // Exit the function
     } else {
         speak("I didn't understand that. Could you please repeat?");
     }
 
-    recognition.stop(); // Stop listening after executing the command
+    // Set a new inactivity timeout
+    inactivityTimeout = setTimeout(() => {
+        speak("Thanks for using Jarvis. Goodbye!");
+        setTimeout(() => {
+            location.reload(); // Refresh the page after saying goodbye
+        }, 1000); // Wait 1 second before refreshing
+    }, 20000); // 20 seconds of inactivity
 }
 
 // Start interaction only after user presses "Enter"
