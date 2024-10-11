@@ -1,8 +1,8 @@
-
 const btn = document.querySelector('.talk');
 const content = document.querySelector('.content');
 
 let inactivityTimeout; // Variable to track inactivity timeout
+let recognitionTimeout; // Variable to track program exit timeout
 
 // Function to speak text using SpeechSynthesis
 function speak(text) {
@@ -55,6 +55,7 @@ recognition.onresult = (event) => {
 function takeCommand(message) {
     // Clear the inactivity timeout whenever a command is received
     clearTimeout(inactivityTimeout);
+    clearTimeout(recognitionTimeout); // Clear the program exit timeout
 
     if (message.includes('hey') || message.includes('hello')) {
         speak("Hello Sir, How may I help you today?");
@@ -86,7 +87,14 @@ function takeCommand(message) {
     } else if (message.includes('stop')) {
         speak("Goodbye, Sir.");
         recognition.stop();
-        clearTimeout(inactivityTimeout); // Clear any existing timeout
+        
+        // Set a timeout to exit the program after 5 seconds
+        recognitionTimeout = setTimeout(() => {
+            speak("Thanks for using Jarvis. Goodbye!");
+            setTimeout(() => {
+                location.reload(); // Refresh the page after saying goodbye
+            }, 1000); // Wait 1 second before refreshing
+        }, 5000); // 5 seconds before program exit
         return; // Exit the function
     } else {
         speak("I didn't understand that. Could you please repeat?");
@@ -98,7 +106,7 @@ function takeCommand(message) {
         setTimeout(() => {
             location.reload(); // Refresh the page after saying goodbye
         }, 1000); // Wait 1 second before refreshing
-    }, 30000); // 20 seconds of inactivity
+    }, 20000); // 20 seconds of inactivity
 }
 
 // Start interaction only after user presses "Enter"
@@ -114,3 +122,4 @@ window.addEventListener('keydown', (e) => {
 recognition.onend = () => {
     btn.classList.add('glow'); // Make the button glow again when recognition stops
 };
+
