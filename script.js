@@ -98,7 +98,7 @@ function takeCommand(message) {
         setTimeout(() => {
             location.reload(); // Refresh the page after saying goodbye
         }, 1000); // Wait 1 second before refreshing
-    }, 20000); // 20 seconds of inactivity
+    }, 30000); // 20 seconds of inactivity
 }
 
 // Start interaction only after user presses "Enter"
