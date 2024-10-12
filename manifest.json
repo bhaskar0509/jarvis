@@ -1,11 +1,12 @@
 {
-    "name": "jarvis",
-    "short_name": "App",
-    "start_url": "/index.html",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#ffffff",
-    "icons": [
+    "name": "Jarvis Voice Assistant",
+  "short_name": "Jarvis",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "A voice-activated assistant that performs various tasks.",
+  "icons": [
       {
         "src": "/images/download.jpg", 
         "sizes": "192x192",
@@ -17,5 +18,6 @@
         "type": "image/jpeg" 
       }
     ]
-  }
+  
+}
   
