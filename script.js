@@ -1,10 +1,4 @@
-// Check if the browser supports service workers
-if ('serviceWorker' in navigator) {
-    // Register the service worker
-    navigator.serviceWorker.register('/service-worker.js')
-        .then(() => console.log('Service Worker Registered'))
-        .catch((error) => console.log('Service Worker Registration Failed:', error));
-}
+
 
 const btn = document.querySelector('.talk');
 const content = document.querySelector('.content');
