@@ -1,3 +1,11 @@
+// Check if the browser supports service workers
+if ('serviceWorker' in navigator) {
+    // Register the service worker
+    navigator.serviceWorker.register('/service-worker.js')
+        .then(() => console.log('Service Worker Registered'))
+        .catch((error) => console.log('Service Worker Registration Failed:', error));
+}
+
 const btn = document.querySelector('.talk');
 const content = document.querySelector('.content');
 
@@ -84,6 +92,32 @@ function takeCommand(message) {
     } else if (message.includes('calculator')) {
         window.open('Calculator:///');
         speak("Opening Calculator");
+    } else if (message.includes('volume up')) {
+        speak("Increasing volume...");
+        // Trigger system-level command for volume up
+        // (Platform-specific code or external integration needed)
+    } else if (message.includes('volume down')) {
+        speak("Decreasing volume...");
+        // Trigger system-level command for volume down
+        // (Platform-specific code or external integration needed)
+    } else if (message.includes('mute')) {
+        speak("Muting volume...");
+        // Trigger system command or use external library to mute volume
+    } else if (message.includes('unmute')) {
+        speak("Unmuting volume...");
+        // Trigger system command or use external library to unmute volume
+    } else if (message.includes('brightness up')) {
+        speak("Increasing brightness...");
+        // Use system-specific commands or external libraries to increase brightness
+    } else if (message.includes('brightness down')) {
+        speak("Decreasing brightness...");
+        // Use system-specific commands or external libraries to decrease brightness
+    } else if (message.includes('lock screen')) {
+        speak("Locking the screen...");
+        // JavaScript cannot directly lock the screen; OS-specific command needed
+    } else if (message.includes('screenshot')) {
+        speak("Taking a screenshot...");
+        // Use system-specific or external libraries to capture a screenshot
     } else if (message.includes('stop')) {
         speak("Goodbye, Sir.");
         recognition.stop();
