@@ -1,23 +1,22 @@
 {
-    "name": "Jarvis Voice Assistant",
-  "short_name": "Jarvis",
-  "start_url": "/index.html",
+  "name": "Voice Assistant",
+  "short_name": "Assistant",
+  "description": "A simple voice assistant web app.",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
-  "description": "A voice-activated assistant that performs various tasks.",
+  "background_color": "#000000",
+  "theme_color": "#00bcd4",
+  "orientation": "portrait",
   "icons": [
-      {
-        "src": "/images/download.jpg", 
-        "sizes": "192x192",
-        "type": "image/jpeg"
-      },
-      {
-        "src": "/images/download.jpeg", 
-        "sizes": "512x512",
-        "type": "image/jpeg" 
-      }
-    ]
-  
+    {
+      "src": "download(1).jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "download(1).jpg",
+      "sizes": "512x512",
+      "type": "image/jpg"
+    }
+  ]
 }
-  
